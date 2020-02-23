@@ -1,63 +1,60 @@
 package cs301.birthdaycake;
 
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.SeekBar;
 
-import static cs301.birthdaycake.CakeView.cakeLeft;
-import static cs301.birthdaycake.CakeView.cakeTop;
-import static cs301.birthdaycake.CakeView.cakeWidth;
-import static cs301.birthdaycake.CakeView.candleWidth;
 
 public class CakeController implements View.OnClickListener, CompoundButton.OnCheckedChangeListener,
-        SeekBar.OnSeekBarChangeListener
-{
+        SeekBar.OnSeekBarChangeListener, View.OnTouchListener {
+
     private CakeView cakeView;
     private CakeModel cakeModel;
 
-    public CakeController(CakeView cv)
-    {
+    public CakeController(CakeView cv) {
         this.cakeView = cv;
-        cakeModel = cv.getCakeModel();
+        cakeModel = cv.getOurModel();
     }
 
     @Override
-    public void onClick(View v)
-    {
+    public void onClick(View v) {
         cakeModel.isLit = false;
         cakeView.invalidate();
     }
 
     @Override
-    public void onCheckedChanged(CompoundButton cb, boolean isChecked)
-    {
-        if(isChecked == true)
-        {
+    public void onCheckedChanged(CompoundButton cb, boolean isChecked) {
+        if (isChecked == true) {
             cakeModel.hasCandles = true;
-        }
-        else
-        {
+        } else {
             cakeModel.hasCandles = false;
         }
         cakeView.invalidate();
     }
 
     @Override
-    public void onProgressChanged(SeekBar seekBar, int progress, boolean unused)
-    {
+    public void onProgressChanged(SeekBar seekBar, int progress, boolean unused) {
         cakeModel.numCandles = progress;
     }
 
     @Override
-    public void onStartTrackingTouch(SeekBar seekBar)
-    {
+    public void onStartTrackingTouch(SeekBar seekBar) {
 
     }
 
     @Override
-    public void onStopTrackingTouch(SeekBar seekBar)
-    {
+    public void onStopTrackingTouch(SeekBar seekBar) {
         cakeView.invalidate();
     }
+
+    @Override
+    public boolean onTouch(View view, MotionEvent motionEvent) {
+        cakeModel.x = motionEvent.getX();
+        cakeModel.y = motionEvent.getY();
+        view.invalidate();
+        return true;
+    }
+
 }

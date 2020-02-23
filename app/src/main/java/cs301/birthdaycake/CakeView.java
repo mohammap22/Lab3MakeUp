@@ -5,7 +5,9 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.util.AttributeSet;
+import android.view.MotionEvent;
 import android.view.SurfaceView;
+import android.view.View;
 
 public class CakeView extends SurfaceView {
 
@@ -16,6 +18,16 @@ public class CakeView extends SurfaceView {
     Paint outerFlamePaint = new Paint();
     Paint innerFlamePaint = new Paint();
     Paint wickPaint = new Paint();
+    Paint textpaint = new Paint();
+
+    Paint balloonStringPaint = new Paint();
+    Paint balloonPaint = new Paint();
+
+    public CakeModel getOurModel() {
+        return ourModel;
+    }
+
+    private CakeModel ourModel;
 
     /* These constants define the dimensions of the cake.  While defining constants for things
         like this is good practice, we could be calculating these better by detecting
@@ -27,15 +39,12 @@ public class CakeView extends SurfaceView {
     public static final float cakeWidth = 1200.0f;
     public static final float layerHeight = 200.0f;
     public static final float frostHeight = 50.0f;
-    public static final float candleHeight = 200.0f;
+    public static final float candleHeight = 50.0f;
     public static final float candleWidth = 40.0f;
     public static final float wickHeight = 30.0f;
     public static final float wickWidth = 6.0f;
     public static final float outerFlameRadius = 30.0f;
     public static final float innerFlameRadius = 15.0f;
-
-    //stuff added in lab3
-    private CakeModel cakeModel = new CakeModel();
 
 
 
@@ -43,7 +52,7 @@ public class CakeView extends SurfaceView {
      * ctor must be overridden here as per standard Java inheritance practice.  We need it
      * anyway to initialize the member variables
      */
-    public CakeView(Context context, AttributeSet attrs) {
+    public CakeView(Context context, AttributeSet attrs){
         super(context, attrs);
 
         //This is essential or your onDraw method won't get called
@@ -62,6 +71,16 @@ public class CakeView extends SurfaceView {
         innerFlamePaint.setStyle(Paint.Style.FILL);
         wickPaint.setColor(Color.BLACK);
         wickPaint.setStyle(Paint.Style.FILL);
+        balloonStringPaint.setColor(Color.GRAY);
+        balloonStringPaint.setStyle(Paint.Style.FILL);
+        balloonPaint.setColor(Color.BLUE);
+        balloonPaint.setStyle(Paint.Style.FILL);
+
+
+        textpaint.setColor(Color.RED);
+        textpaint.setTextSize(60);
+
+        ourModel = new CakeModel();
 
         setBackgroundColor(Color.WHITE);  //better than black default
 
@@ -74,7 +93,8 @@ public class CakeView extends SurfaceView {
     public void drawCandle(Canvas canvas, float left, float bottom) {
         canvas.drawRect(left, bottom - candleHeight, left + candleWidth, bottom, candlePaint);
 
-        if(cakeModel.isLit == true) {
+        if (ourModel.isLit) {
+
             //draw the outer flame
             float flameCenterX = left + candleWidth / 2;
             float flameCenterY = bottom - wickHeight - candleHeight - outerFlameRadius / 3;
@@ -83,11 +103,13 @@ public class CakeView extends SurfaceView {
             //draw the inner flame
             flameCenterY += outerFlameRadius / 3;
             canvas.drawCircle(flameCenterX, flameCenterY, innerFlameRadius, innerFlamePaint);
+
         }
-            //draw the wick
-            float wickLeft = left + candleWidth / 2 - wickWidth / 2;
-            float wickTop = bottom - wickHeight - candleHeight;
-            canvas.drawRect(wickLeft, wickTop, wickLeft + wickWidth, wickTop + wickHeight, wickPaint);
+
+        //draw the wick
+        float wickLeft = left + candleWidth/2 - wickWidth/2;
+        float wickTop = bottom - wickHeight - candleHeight;
+        canvas.drawRect(wickLeft, wickTop, wickLeft + wickWidth, wickTop + wickHeight, wickPaint);
 
     }
 
@@ -123,20 +145,24 @@ public class CakeView extends SurfaceView {
         //Then a second cake layer
         canvas.drawRect(cakeLeft, top, cakeLeft + cakeWidth, bottom, cakePaint);
 
-        //Now a candle in the center
-        if(cakeModel.hasCandles == true)
-        {
-            for(int h = 1; h <= cakeModel.numCandles; h++)
-            {
-                drawCandle(canvas, cakeLeft + h*cakeWidth/5 - candleWidth/2, cakeTop);
+        if (ourModel.hasCandles) {
+            //Now a candle in the center
+
+            int num = ourModel.numCandles;
+
+            for (int i = 1; i <= num; i++) {
+                drawCandle(canvas,  cakeLeft + (cakeWidth / num)*i - candleWidth / num - 50, cakeTop);
             }
+
+
         }
+
+
+
+        canvas.drawText(String.format("%.0f,%.0f", ourModel.x ,ourModel.y),40, 240, textpaint);
+
+
+
     }//onDraw
 
-    //added in lab3
-    public CakeModel getCakeModel()
-    {
-        return cakeModel;
-    }
 }//class CakeView
-
