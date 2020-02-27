@@ -10,7 +10,7 @@ import android.widget.CompoundButton;
 import android.widget.SeekBar;
 import android.widget.Switch;
 
-public class MainActivity extends AppCompatActivity {//ah look! another minor change
+public class MainActivity extends AppCompatActivity {
     //look I made a minor change! 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

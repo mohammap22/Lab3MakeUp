@@ -35,7 +35,7 @@ public class CakeController implements View.OnClickListener, CompoundButton.OnCh
     }
 
     @Override
-    public void onProgressChanged(SeekBar seekBar, int progress, boolean unused) {
+    public void onProgressChanged(SeekBar seekBar, int progress, boolean unused) {//ah look! another minor changeddddd
         cakeModel.numCandles = progress;
     }
 
@@ -58,7 +58,7 @@ public class CakeController implements View.OnClickListener, CompoundButton.OnCh
         cakeModel.x = event.getX();
         cakeModel.y = event.getY();
         cakeView.invalidate();
-        return true;
+        return true; //yeppp
     }
 
 }
