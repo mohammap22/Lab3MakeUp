@@ -145,7 +145,7 @@ public class CakeView extends SurfaceView {
         //Then a second cake layer
         canvas.drawRect(cakeLeft, top, cakeLeft + cakeWidth, bottom, cakePaint);
 
-        if (ourModel.hasCandles) {
+        if (ourModel.hasCandles) {//THATS RIGHT 
             //Now a candle in the center
 
             int num = ourModel.numCandles;
