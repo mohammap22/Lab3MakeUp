@@ -11,8 +11,10 @@ import android.widget.SeekBar;
 import android.widget.Switch;
 
 public class MainActivity extends AppCompatActivity {
+    //look I made a very minor change!
+    //I added this for this checkpoint
     //look I made a minor change to a comment
-    //it has no functional impact 
+    //it has no functional impact
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
