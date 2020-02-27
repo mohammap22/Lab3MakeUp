@@ -84,7 +84,7 @@ public class CakeView extends SurfaceView {
 
         setBackgroundColor(Color.WHITE);  //better than black default
 
-    }
+    }//iM DOING CRAZY THINGS
 
     /**
      * draws a candle at a specified position.  Important:  the left, bottom coordinates specify

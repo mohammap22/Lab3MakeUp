@@ -10,7 +10,7 @@ import android.widget.SeekBar;
 public class CakeController implements View.OnClickListener, CompoundButton.OnCheckedChangeListener,
         SeekBar.OnSeekBarChangeListener, View.OnTouchListener {
 
-    private CakeView cakeView;
+    private CakeView cakeView;//ah look! another minor change
     private CakeModel cakeModel;
 
     public CakeController(CakeView cv) {
@@ -19,7 +19,7 @@ public class CakeController implements View.OnClickListener, CompoundButton.OnCh
     }
 
     @Override
-    public void onClick(View v) {
+    public void onClick(View v) {//HAHA MORE CRAZY
         cakeModel.isLit = false;
         cakeView.invalidate();
     }
