@@ -11,7 +11,8 @@ import android.widget.SeekBar;
 import android.widget.Switch;
 
 public class MainActivity extends AppCompatActivity {
-    //look I made a minor change! 
+    //look I made a minor change to a comment
+    //it has no functional impact 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
