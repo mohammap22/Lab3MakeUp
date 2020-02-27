@@ -8,4 +8,5 @@ public class CakeModel
     public boolean hasCandles = true;
     public float x;
     public float y;
+    float[] balloonCoordinates = new float[]{-1f,-1f};
 }

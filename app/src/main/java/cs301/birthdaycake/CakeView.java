@@ -156,10 +156,13 @@ public class CakeView extends SurfaceView {
 
 
         }
+        if (ourModel.balloonCoordinates[0] != -1f)
+        {
+            canvas.drawRect(ourModel.balloonCoordinates[0],ourModel.balloonCoordinates[1] - 200,ourModel.balloonCoordinates[0]+5,ourModel.balloonCoordinates[1],balloonStringPaint);
+            canvas.drawOval(ourModel.balloonCoordinates[0] - 90,ourModel.balloonCoordinates[1] - 400,ourModel.balloonCoordinates[0] + 90,ourModel.balloonCoordinates[1] - 200,balloonPaint);
+        }
 
 
-
-        canvas.drawText(String.format("%.0f,%.0f", ourModel.x ,ourModel.y),40, 240, textpaint);
 
 
 
